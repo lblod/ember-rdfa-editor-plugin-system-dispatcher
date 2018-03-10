@@ -1,0 +1,21 @@
+{
+  "name": "ember-rdfa-editor-plugin-system-dispatcher",
+  "description": "At the core of the plugin system lies the dispatcher. This component wires the plugins together.",
+  "version": "0.4.0",
+  "options": {
+    "paths": [
+      "addon",
+      "app"
+    ],
+    "exclude": "vendor",
+    "outdir": "docs",
+    "linkNatives": true,
+    "quiet": true,
+    "parseOnly": false,
+    "lint": false,
+    "themedir": "node_modules/yuidoc-ember-theme",
+    "helpers": [
+      "node_modules/yuidoc-ember-theme/helpers/helpers.js"
+    ]
+  }
+}
