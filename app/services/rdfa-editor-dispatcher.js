@@ -1,7 +1,7 @@
+import { warn } from '@ember/debug';
 import Service, { inject } from '@ember/service';
 import { A } from '@ember/array';
 import { camelize, dasherize } from '@ember/string';
-import Ember from 'ember';
 import RSVP from 'rsvp';
 import editorProfiles from '../config/editor-profiles';
 
@@ -48,7 +48,7 @@ let service = {
           self.get( variableNameForPlugin( plugin ) ).execute(hintsRegistryIndex, contexts, hintsRegistry, editor);
         });
       } else {
-        Ember.Logger.warn(`Editor plugin profile "${profile}" was not found`);
+        warn(`Editor plugin profile "${profile}" was not found`);
       }
 
       resolve();

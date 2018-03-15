@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-rdfa-editor-plugin-system-dispatcher'
+  name: '@lblod/ember-rdfa-editor-plugin-system-dispatcher'
 };
