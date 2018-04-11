@@ -45,7 +45,15 @@ let service = {
 
       if( plugins ){
         plugins.forEach( (plugin) => {
-          self.get( variableNameForPlugin( plugin ) ).execute(hintsRegistryIndex, contexts, hintsRegistry, editor);
+          const pluginService = self.get(variableNameForPlugin(plugin));
+          if (typeof(pluginService.get('execute.perform')) == 'function') { // ember-concurrency task
+            pluginService.get('execute').perform(hintsRegistryIndex, contexts, hintsRegistry, editor);
+          }
+          else if (typeof(pluginService.get('execute')) == 'function') {
+            pluginService.execute(hintsRegistryIndex, contexts, hintsRegistry, editor);
+          } else {
+            warn(`Plugin ${plugin} doesn't provide 'execute' as function nor ember-concurrency task`);
+          }
         });
       } else {
         warn(`Editor plugin profile "${profile}" was not found`);
