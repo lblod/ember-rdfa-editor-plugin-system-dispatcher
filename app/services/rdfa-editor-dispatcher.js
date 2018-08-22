@@ -62,6 +62,20 @@ let service = {
       resolve();
 
     });
+  },
+
+  requestHints(profile, context, editor) {
+    const plugins = editorProfiles[profile];
+    const hints = A();
+    if (plugins) {
+      for (let plugin of plugins) {
+        let pluginService = this.get(variableNameForPlugin(plugin));
+        if (pluginService.suggestHints) {
+          hints.pushObjects(pluginService.suggestHints(context, editor));
+        }
+      }
+    }
+    return hints;
   }
 
 };
