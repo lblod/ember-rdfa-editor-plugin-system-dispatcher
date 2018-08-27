@@ -64,14 +64,15 @@ let service = {
     });
   },
 
-  requestHints(profile, context, editor) {
+  async requestHints(profile, context, editor) {
     const plugins = editorProfiles[profile];
     const hints = A();
     if (plugins) {
       for (let plugin of plugins) {
         let pluginService = this.get(variableNameForPlugin(plugin));
         if (pluginService.suggestHints) {
-          hints.pushObjects(pluginService.suggestHints(context, editor));
+          let receivedHints=await pluginService.suggestHints(context, editor);
+          hints.pushObjects(receivedHints);
         }
       }
     }

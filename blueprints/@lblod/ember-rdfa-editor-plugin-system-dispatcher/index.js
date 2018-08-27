@@ -2,7 +2,7 @@
 module.exports = {
   description: 'Sets up the dispatcher with a config file in /app/config/editor-profiles.js',
 
-  normalizeEntityName() { },
+  normalizeEntityName() { }
 
   // locals(options) {
   //   // Return custom template variables here.
