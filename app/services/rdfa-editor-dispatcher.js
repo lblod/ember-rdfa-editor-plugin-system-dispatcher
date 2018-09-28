@@ -34,11 +34,12 @@ let service = {
   * @param {Array} contexts RDFa contexts of the text snippets the event applies on
   * @param {Object} hintsRegistry Registry of hints in the editor
   * @param {Object} editor The RDFa editor instance
+  * @param {Array} Optional argument to contain extra info.
   *
   * @return {Promise} A promise that resolves when the event has been dispatched to the plugins
   *
   */
-  dispatch(profile, hintsRegistryIndex, contexts, hintsRegistry, editor){
+  dispatch(profile, hintsRegistryIndex, contexts, hintsRegistry, editor, extraInfo = []){
     let self = this;
     return new RSVP.Promise(function(resolve){
 
@@ -48,10 +49,10 @@ let service = {
         plugins.forEach( (plugin) => {
           const pluginService = self.get(variableNameForPlugin(plugin));
           if (typeof(pluginService.get('execute.perform')) == 'function') { // ember-concurrency task
-            next(() => { pluginService.get('execute').perform(hintsRegistryIndex, contexts, hintsRegistry, editor); });
+            next(() => { pluginService.get('execute').perform(hintsRegistryIndex, contexts, hintsRegistry, editor, extraInfo); });
           }
           else if (typeof(pluginService.get('execute')) == 'function') {
-            pluginService.execute(hintsRegistryIndex, contexts, hintsRegistry, editor);
+            pluginService.execute(hintsRegistryIndex, contexts, hintsRegistry, editor, extraInfo);
           } else {
             warn(`Plugin ${plugin} doesn't provide 'execute' as function nor ember-concurrency task`);
           }
