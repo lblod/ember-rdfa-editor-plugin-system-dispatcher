@@ -1,6 +1,6 @@
 {
   "name": "@lblod/ember-rdfa-editor-plugin-system-dispatcher",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "At the core of the plugin system lies the dispatcher. This component wires the plugins together.",
   "keywords": [
     "ember-addon"
