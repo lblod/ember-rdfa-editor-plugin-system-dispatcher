@@ -60,7 +60,6 @@ let service = {
       } else {
         warn(`Editor plugin profile "${profile}" was not found`);
       }
-
       resolve();
 
     });
@@ -79,7 +78,15 @@ let service = {
       }
     }
     return hints;
-  }
+  },
+
+   init() {
+     this._super(...arguments);
+     let pluginServices = A();
+     let allPlugins = calculateAllPlugins( editorProfiles );
+     allPlugins.forEach( p => pluginServices.pushObject(this.get(variableNameForPlugin(p)) ));
+     this.set('pluginServices', pluginServices);
+   }
 
 };
 
@@ -88,7 +95,6 @@ let allPlugins = calculateAllPlugins( editorProfiles );
 allPlugins.forEach( (p) => {
   service[variableNameForPlugin(p)] = inject(dasherize(p));
 } );
-
 
 /**
 * RDFa Editor system dispatcher that dispatches editor events to the configured plugins
