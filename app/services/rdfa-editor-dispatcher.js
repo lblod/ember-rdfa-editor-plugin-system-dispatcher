@@ -54,11 +54,11 @@ let service = {
           else if (typeof(pluginService.get('execute')) == 'function') {
             pluginService.execute(hintsRegistryIndex, contexts, hintsRegistry, editor, extraInfo);
           } else {
-            warn(`Plugin ${plugin} doesn't provide 'execute' as function nor ember-concurrency task`);
+            warn(`Plugin ${plugin} doesn't provide 'execute' as function nor ember-concurrency task`, { id: "disptacher_plugin_no_execute" });
           }
         });
       } else {
-        warn(`Editor plugin profile "${profile}" was not found`);
+        warn(`Editor plugin profile "${profile}" was not found`, { id: "disptacher_no_profile" });
       }
       resolve();
 
